@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيانات الطقس</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            direction: rtl;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>بيانات الطقس لمدينة {{ city }} في تاريخ {{ date }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>التاريخ والوقت</th>
+                <th>الرطوبة</th>
+                <th>الضغط</th>
+                <th>وصف الطقس</th>
+                <th>درجة الحرارة</th>
+                <th>اتجاه الرياح</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in weather_data %}
+            <tr>
+                <td>{{ record['datetime'] }}</td>
+                <td>{{ record['Humidity'] | default('غير متوفر') }}</td>
+                <td>{{ record['Pressure'] | default('غير متوفر') }}</td>
+                <td>{{ record['Weather Description'] | default('غير متوفر') }}</td>
+                <td>{{ record['Temperature'] | default('غير متوفر') }}</td>
+                <td>{{ record['Wind Direction'] | default('غير متوفر') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
